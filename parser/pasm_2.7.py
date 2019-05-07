@@ -1,7 +1,9 @@
+from __future__ import print_function
 import sys
 import getopt
 import os, os.path
 import re
+import io
 
 __author__  = "Thomas Neubert"
 __version__ = "1.0.0"
@@ -522,7 +524,7 @@ def main(argv=[]):
         return
 
     # start parsing line by line...
-    with open(f_name_in, mode='r', encoding='utf16') as f_in:
+    with io.open(f_name_in, mode='r', encoding='utf16') as f_in:
         try:
             line_num = 0
             for line_str in f_in:
@@ -631,9 +633,9 @@ def main(argv=[]):
                     stmt_list.append(Statement('ret', [], lab))
 
         # convert to qedit readable format
-        with open(f_name_out, 'w', encoding='utf-16') as f_out:
+        with io.open(f_name_out, 'w', encoding='utf-16') as f_out:
             for stmt in stmt_list:
-                print(stmt.to_string(), file=f_out)
+                print(unicode(stmt.to_string()), file=f_out)
 
 
 # All text...
