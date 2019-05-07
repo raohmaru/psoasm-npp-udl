@@ -1,0 +1,2517 @@
+<?xml version="1.0" encoding="Windows-1252" ?>
+<NotepadPlus>
+	<!-- Created by raohmaru, visit https://github.com/raohmaru/psoasm-npp-udl for the latest version -->
+	<AutoComplete language="PSO asm">
+		<Environment ignoreCase="no" startFunc="" stopFunc="" paramSeparator="," terminal="" additionalWordChar="&lt;&gt;=?!&amp;"/>
+		<KeyWord name="activate_paletteX" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="add" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="addi" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="add_damage_to?" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="add_msg" func="yes">
+			<Overload retVal="">
+				<Param name="T_STR" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="and" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="andi" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="animation_check" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="arg_pushb" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_BREG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="arg_pushl" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="arg_pushr" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="arg_pushs" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_STR" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="arg_pushw" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_WORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="at_coords_call" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="at_coords_talk" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="award_item_give_to?" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="award_item_name?" func="yes">
+			<Overload retVal="" descr="v2">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="award_item_ok?" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="award_item_select?" func="yes">
+			<Overload retVal="" descr="v2">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ba_close_msg" func="yes">
+			<Overload retVal="" descr="v2">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ba_disp_msg" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_STR" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ba_initial_floor" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ba_set_lives" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ba_set_lvl" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ba_set_tech_lvl" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ba_set_time_limit" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="BB_box_create_BP" func="yes">
+			<Overload retVal="" descr="v4">
+				<Param name="T_DWORD" />
+				<Param name="T_FLOAT" />
+				<Param name="T_FLOAT" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="BB_check_wrap" func="yes">
+			<Overload retVal="" descr="v4">
+				<Param name="T_REG" />
+				<Param name="T_BREG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="BB_exchage_PT" func="yes">
+			<Overload retVal="" descr="v4">
+				<Param name="T_BREG" />
+				<Param name="T_BREG" />
+				<Param name="T_DWORD" />
+				<Param name="T_FUNC2" />
+				<Param name="T_FUNC2" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="BB_exchange_PC" func="yes">
+			<Overload retVal="" descr="v4">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="BB_exchange_PD_item" func="yes">
+			<Overload retVal="" descr="v4">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_FUNC2" />
+				<Param name="T_FUNC2" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="BB_exchange_PD_percent" func="yes">
+			<Overload retVal="" descr="v4">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_DWORD" />
+				<Param name="T_FUNC2" />
+				<Param name="T_FUNC2" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="BB_exchange_PD_special" func="yes">
+			<Overload retVal="" descr="v4">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_DWORD" />
+				<Param name="T_FUNC2" />
+				<Param name="T_FUNC2" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="BB_exchange_PD_srank" func="yes">
+			<Overload retVal="" descr="v4">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_FUNC2" />
+				<Param name="T_FUNC2" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="BB_exchange_SLT" func="yes">
+			<Overload retVal="" descr="v4">
+				<Param name="T_ARGS" />
+				<Param name="T_DWORD" />
+				<Param name="T_BREG" />
+				<Param name="T_FUNC2" />
+				<Param name="T_FUNC2" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="BB_get_number_in_pack" func="yes">
+			<Overload retVal="" descr="v4">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="BB_Map_Designate" func="yes">
+			<Overload retVal="" descr="v4">
+				<Param name="T_BYTE" />
+				<Param name="T_WORD" />
+				<Param name="T_BYTE" />
+				<Param name="T_BYTE" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="BB_p2_menu" func="yes">
+			<Overload retVal="" descr="v4">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="BB_swap_item" func="yes">
+			<Overload retVal="" descr="v4">
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_FUNC2" />
+				<Param name="T_FUNC2" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="bgm" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="boss_is_dead2?" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="boss_is_dead?" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="call" func="yes">
+			<Overload retVal="">
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="call_image_data" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_DATA" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="cam_adj" />
+		<KeyWord name="cam_pan_V1" func="yes">
+			<Overload retVal="">
+				<Param name="T_DREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="cam_pan_V3" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="cam_quake" />
+		<KeyWord name="cam_zmin" />
+		<KeyWord name="cam_zmout" />
+		<KeyWord name="chat_box" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_STR" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="chat_bubble" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_STR" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="chk_ene_num" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="chl_get_timerecord?" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="chl_recovery?" func="yes">
+			<Overload retVal="" descr="v2">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="chl_reverser?" func="yes">
+			<Overload retVal="" descr="v2">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="chl_set_timerecord?" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="cine_disable" />
+		<KeyWord name="cine_enable" />
+		<KeyWord name="clear" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="clear_mainwarp" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="clear_quest_board_handler" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="close_chat_bubble" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="close_msg_qb" />
+		<KeyWord name="clr_floor_handler" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="clr_qt_cancel" />
+		<KeyWord name="clr_qt_exit" />
+		<KeyWord name="clr_qt_failure" />
+		<KeyWord name="clr_qt_success" />
+		<KeyWord name="cmode_rank" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+				<Param name="T_STR" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="cmode_stage" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="color_change" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="col_npcin" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="col_npcinr" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="col_plinaw" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="control_dragon" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="cos" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_BREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="create_bgmctrl" />
+		<KeyWord name="create_pipe" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="death_lvl_up" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="death_score" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="death_tech_lvl_up" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="dec2float" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="default_camera_pos1" />
+		<KeyWord name="default_camera_pos2" func="yes">
+			<Overload retVal="" descr="v3">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="delete_area_title?" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="del_obj_param" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="disable" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="disable_mainmenu" func="yes">
+			<Overload retVal="">
+				<Param name="T_NONE" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="disable_movement1" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="disable_movement2" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="disable_paletteX" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="disable_techs" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="display_clock2?" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="disp_chl_retry_mnu" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="disp_msg_qb" func="yes">
+			<Overload retVal="">
+				<Param name="T_STR" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="div" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="divi" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="enable" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="enable_bgmctrl" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="enable_mainmenu" />
+		<KeyWord name="enable_movement1" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="enable_movement2" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="enable_paletteX" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="enable_techs" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="end_battlebgm" />
+		<KeyWord name="enemy_death_score" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="equip_item_v2" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DREG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="equip_item_v3" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="exit" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="exp_division?" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="exp_multiplication" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="fadd" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="faddi" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_FLOAT" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="fadein" />
+		<KeyWord name="fadeout" />
+		<KeyWord name="fdiv" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="fdivi" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_FLOAT" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="file_dl_req" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_STR" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="flet" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="fleti" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_FLOAT" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="fleti_fixed_camera" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_BREG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="fleti_locked_camera" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_BREG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="float2dec" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="floor_player_detect" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="fmul" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="fmuli" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_FLOAT" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="freeze_and_hide_equip" func="yes">
+			<Overload retVal="" descr="v3">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="freeze_enemies" func="yes">
+			<Overload retVal="" descr="v3">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="freeze_everything" func="yes">
+			<Overload retVal="" descr="v3">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="fsub" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="fsubi" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_FLOAT" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="game_lev_reset" />
+		<KeyWord name="game_lev_super" />
+		<KeyWord name="gba_unknown1" func="yes">
+			<Overload retVal="" descr="v3">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="gba_unknown2" func="yes">
+			<Overload retVal="" descr="v3">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="gba_unknown3" func="yes">
+			<Overload retVal="" descr="v3">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="gba_unknown4?" func="yes">
+			<Overload retVal="" descr="v3">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="gclear" func="yes">
+			<Overload retVal="">
+				<Param name="T_PFLAG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="getmtime" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="gettime" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_attack_data" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DATA" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_button_cond" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_chara_class" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_coord_of_player" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_coord_player_detect" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_difflvl" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_difflvl2" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_dl_status" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_floor_number" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_BREG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_gba_state?" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_gc_number" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_gender" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_guildcard_num" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_BREG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_guildcard_total" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_item_id" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_item_info" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_BREG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_lang_setting?" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_BREG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_movement_data" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DATA" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_npc_data" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DATA" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_number_of_player1" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_number_of_player2" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_pad_cond" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_paletteX_activated" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_BREG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_physical_data" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DATA" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_player_hp" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_BREG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_player_level" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_BREG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_player_status" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_pl_name?" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_random" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_resist_data" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DATA" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_Section_ID" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_BREG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_servernumber" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_slotnumber" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_slot_meseta" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_stackable_item_count" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_time_played" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_unknown_count?" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_BREG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_unknown_paletteX_status?" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_BREG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_user_is_dead?" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="get_wrap_status" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_BREG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="gget" func="yes">
+			<Overload retVal="">
+				<Param name="T_PFLAG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="give_damage_score" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="glet" func="yes">
+			<Overload retVal="">
+				<Param name="T_PFLAG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="go_floor" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="grev" func="yes">
+			<Overload retVal="">
+				<Param name="T_PFLAG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="gset" func="yes">
+			<Overload retVal="">
+				<Param name="T_PFLAG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="hud_hide" />
+		<KeyWord name="hud_show" />
+		<KeyWord name="if_switch_not_pressed" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="if_switch_pressed" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="if_zone_clear" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="initial_floor" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="is_there_cardbattle?" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="item_check" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="item_create" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="item_create2" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="item_create_cmode" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="item_delete" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="item_delete2" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="item_delete2" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="item_packing1" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="item_packing2" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="item_select" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="jmp" func="yes">
+			<Overload retVal="">
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="jmpi_!=" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_DWORD" />
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="jmpi_&amp;lt;" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_DWORD" />
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="jmpi_&amp;lt;=" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_DWORD" />
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="jmpi_=" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_DWORD" />
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="jmpi_&amp;gt;" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_DWORD" />
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="jmpi_&amp;gt;=" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_DWORD" />
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="jmp_!=" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="jmp_&amp;lt;" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="jmp_&amp;lt;=" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="jmp_=" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="jmp_&amp;gt;" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="jmp_&amp;gt;=" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="jmp_off" func="yes">
+			<Overload retVal="">
+				<Param name="T_FUNC" />
+				<Param name="T_SWITCH2B" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="jmp_on" func="yes">
+			<Overload retVal="">
+				<Param name="T_FUNC" />
+				<Param name="T_SWITCH2B" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="Keyword" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_BREG" />
+				<Param name="T_DWORD" />
+				<Param name="T_STR" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="keyword_detect" func="yes">
+			<Overload retVal="" descr="v3">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="kill_score" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="let" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="leti" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="leti_fixed_camera_V1" func="yes">
+			<Overload retVal="">
+				<Param name="T_DREG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="leti_fixed_camera_V3" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="list" func="yes">
+			<Overload retVal="">
+				<Param name="T_BREG" />
+				<Param name="T_STR" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="load_enemy_data" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="load_midi" />
+		<KeyWord name="load_npc_data" func="yes">
+			<Overload retVal="" descr="v2">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="load_pvr" />
+		<KeyWord name="load_unk_data" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_BREG" />
+				<Param name="T_DATA" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="lock_door2" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="map_designate" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="map_designate_ex" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="masterkey_off" />
+		<KeyWord name="masterkey_on" />
+		<KeyWord name="mesend" />
+		<KeyWord name="meseta_score" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="message" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+				<Param name="T_STR" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="mod" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="modi" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="mul" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="muli" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="nop" />
+		<KeyWord name="NPC_action_string" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_STRDATA" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="npc_chkwarp" />
+		<KeyWord name="npc_crppk_V1" func="yes">
+			<Overload retVal="">
+				<Param name="T_DREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="npc_crppk_V3" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="npc_crptalk_id_V1" func="yes">
+			<Overload retVal="">
+				<Param name="T_DREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="npc_crptalk_id_V3" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="npc_crptalk_v1" func="yes">
+			<Overload retVal="">
+				<Param name="T_DREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="npc_crptalk_V3" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="npc_crp_id_V1" func="yes">
+			<Overload retVal="">
+				<Param name="T_DREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="npc_crp_id_v3" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="npc_crp_V1" func="yes">
+			<Overload retVal="">
+				<Param name="T_DREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="npc_crp_V3" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="npc_crtpk_V1" func="yes">
+			<Overload retVal="">
+				<Param name="T_DREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="npc_crtpk_V3" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="npc_crt_V1" func="yes">
+			<Overload retVal="">
+				<Param name="T_DREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="npc_crt_V3" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="npc_kill" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="npc_lang_clean" />
+		<KeyWord name="npc_nont" />
+		<KeyWord name="npc_param_V1" func="yes">
+			<Overload retVal="">
+				<Param name="T_DREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="npc_param_V3" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_BREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="npc_play" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="npc_stop" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="npc_talk" />
+		<KeyWord name="npc_talk_kill" func="yes">
+			<Overload retVal="">
+				<Param name="T_ARGS" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="npc_talk_pl_V1" func="yes">
+			<Overload retVal="">
+				<Param name="T_DREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="npc_talk_pl_V3" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="npc_text" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+				<Param name="T_STR" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="online_check" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="open_pack_select" func="yes">
+			<Overload retVal="" descr="v3">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="or" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ori" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="pad_dragon" />
+		<KeyWord name="particle2" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_BREG" />
+				<Param name="T_DWORD" />
+				<Param name="T_FLOAT" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="particle_id_V1" func="yes">
+			<Overload retVal="">
+				<Param name="T_DREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="particle_id_V3" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="particle_V1" func="yes">
+			<Overload retVal="">
+				<Param name="T_DREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="particle_V3" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="pcam_param_V1" func="yes">
+			<Overload retVal="">
+				<Param name="T_DREG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="pcam_param_V3" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="playbgm_epi" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="pl_add_meseta" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="pl_add_meseta2" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="pl_chk_item2" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="pl_pkoff" />
+		<KeyWord name="pl_pkon" />
+		<KeyWord name="pl_walk_V1" func="yes">
+			<Overload retVal="">
+				<Param name="T_DREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="pl_walk_V3" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="pos_pipe_V1" func="yes">
+			<Overload retVal="">
+				<Param name="T_DREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="pos_pipe_V3" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="prepare_statistic?" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_FUNC" />
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="p_action_disable" />
+		<KeyWord name="p_action_enable" />
+		<KeyWord name="p_col" />
+		<KeyWord name="p_dead_V1" func="yes">
+			<Overload retVal="">
+				<Param name="T_DREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="p_dead_V3" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_BREG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="p_disablewarp" />
+		<KeyWord name="p_enablewarp" />
+		<KeyWord name="p_hpstat_V1" func="yes">
+			<Overload retVal="">
+				<Param name="T_DREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="p_hpstat_V3" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_BREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="p_look" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="p_look_at" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="p_move_v1" func="yes">
+			<Overload retVal="">
+				<Param name="T_DREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="p_move_V3" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="p_noncol" />
+		<KeyWord name="p_return_guild" />
+		<KeyWord name="p_setpos" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+				<Param name="T_BREG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="p_talk_guild" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="QEXIT" func="yes">
+			<Overload retVal="" descr="v3">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="read_disk_file?" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_STR" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="read_global_flag" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_BREG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="read_guildcard_flag" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="release_dragon" func="yes">
+			<Overload retVal="" descr="v2">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="res" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="reset_map" func="yes">
+			<Overload retVal="" descr="v2">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="restore_hp" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="restore_paletteX" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="restore_tp" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ret" />
+		<KeyWord name="rev" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="reverse_warps" func="yes">
+			<Overload retVal="" descr="v2">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="run_to_coord" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="scroll_text" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_FLOAT" />
+				<Param name="T_BREG" />
+				<Param name="T_STR" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="se" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="send_mail" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_BREG" />
+				<Param name="T_STR" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="send_regwork" func="yes">
+			<Overload retVal="">
+				<Param name="T_DREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="send_statistic?" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="setevt" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_area_title" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_STR" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_ba_rules" func="yes">
+			<Overload retVal="" descr="v2">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_chat_callback?" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_BREG" />
+				<Param name="T_STR" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_episode" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_eventflag2" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_eventflag_v1" func="yes">
+			<Overload retVal="">
+				<Param name="T_DREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_eventflag_v3" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_floor_handler" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+				<Param name="T_FUNC2" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_mainwarp" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_motion_blur" func="yes">
+			<Overload retVal="" descr="v3">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_obj_param" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_BREG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_paletteX_callback" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_FUNC2" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_qt_cancel" func="yes">
+			<Overload retVal="">
+				<Param name="T_FUNC2" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_qt_exit" func="yes">
+			<Overload retVal="">
+				<Param name="T_FUNC2" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_qt_failure" func="yes">
+			<Overload retVal="">
+				<Param name="T_FUNC2" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_qt_success" func="yes">
+			<Overload retVal="">
+				<Param name="T_FUNC2" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_quest_board_handler" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+				<Param name="T_FUNC2" />
+				<Param name="T_STR" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_returncity" />
+		<KeyWord name="set_returnhunter" />
+		<KeyWord name="set_screen_b&amp;w" func="yes">
+			<Overload retVal="" descr="v3">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_slot_confuse" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_slot_deband" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_slot_freeze" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_slot_invincible" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_slot_jellen" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_slot_paralyse" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_slot_poison" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_slot_shifta" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_slot_shock" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_slot_slow" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_slot_zalure" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="set_ult_map" func="yes">
+			<Overload retVal="" descr="v2">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="shift_left" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="shift_right" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="shrink" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="sin" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_BREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="stack_pop" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="stack_popm" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="stack_push" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="stack_pushm" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="start_battlebgm" />
+		<KeyWord name="start_setevt_v1" func="yes">
+			<Overload retVal="">
+				<Param name="T_DREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="start_setevt_v3" func="yes">
+			<Overload retVal="">
+				<Param name="T_BREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="stop_animation" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="sub" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="subi" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="switch_call" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_SWITCH" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="switch_jmp" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_SWITCH" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="switch_off" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="switch_on" func="yes">
+			<Overload retVal="">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="sw_send" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="sync" />
+		<KeyWord name="sync_let" func="yes">
+			<Overload retVal="">
+				<Param name="T_DREG" />
+				<Param name="T_DREG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="sync_leti" func="yes">
+			<Overload retVal="">
+				<Param name="T_DREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="sync_register" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_BREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="sync_register2" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_BREG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="take_damage_score" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="take_slot_meseta" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="thaw_and_show_equip" func="yes">
+			<Overload retVal="" descr="v3">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="thread" func="yes">
+			<Overload retVal="">
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="thread_stg" func="yes">
+			<Overload retVal="">
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="turn_off_bgm_p2" func="yes">
+			<Overload retVal="" descr="v3">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="turn_on_bgm_p2" func="yes">
+			<Overload retVal="" descr="v3">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ujmpi_&amp;lt;" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_DWORD" />
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ujmpi_&amp;lt;=" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_DWORD" />
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ujmpi_&amp;gt;" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_DWORD" />
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ujmpi_&amp;gt;=" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_DWORD" />
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ujmp_&amp;lt;" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ujmp_&amp;lt;=" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ujmp_&amp;gt;" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="ujmp_&amp;gt;=" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unequip_item_V2" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DREG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unequip_item_V3" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unfreeze_enemies" func="yes">
+			<Overload retVal="" descr="v3">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unfreeze_everything" func="yes">
+			<Overload retVal="" descr="v3">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unhide_ene" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unhide_obj" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknown4F" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownEA" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF8" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF80B" func="yes">
+			<Overload retVal="" descr="v2">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF80C" func="yes">
+			<Overload retVal="" descr="v2">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF80E" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF80F" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF812" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF813" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF814" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF815" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF816" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF817" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF818" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF819" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF81A" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF81B" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF823" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF824" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF82F" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF83D" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF851" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF852" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF858" func="yes">
+			<Overload retVal="" descr="v2">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF85E" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF85F" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF860" func="yes">
+			<Overload retVal="" descr="v2">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF861" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF868" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF869" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF86B" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF86D" func="yes">
+			<Overload retVal="" descr="v2">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF86E" func="yes">
+			<Overload retVal="" descr="v2">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF880" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF883" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF88F" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF890" func="yes">
+			<Overload retVal="" descr="v2">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF89E" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF89F" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF8A0" func="yes">
+			<Overload retVal="" descr="v2">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF8A1" func="yes">
+			<Overload retVal="" descr="v2">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF8A8" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF8A9" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF8B8" func="yes">
+			<Overload retVal="" descr="v2">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF8C4" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF8C5" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF8CB" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF8DB" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+				<Param name="T_BREG" />
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF8E6" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF8E7" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF8E8" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF8E9" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF8EA" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF8EB" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF8EC" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF8EF" func="yes">
+			<Overload retVal="" descr="v3">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF927" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF92F" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF933" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF94B" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF94C" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF959" func="yes">
+			<Overload retVal="" descr="v4">
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF960" func="yes">
+			<Overload retVal="" descr="v4">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownF961" func="yes">
+			<Overload retVal="" descr="v4">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unknownFB" func="yes">
+			<Overload retVal="">
+				<Param name="T_DATA" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unk_score_F84A" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unk_score_F84B" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unk_score_F84E" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unlock_door2" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_DWORD" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unreverse_warps" func="yes">
+			<Overload retVal="" descr="v2">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unset_ult_map" func="yes">
+			<Overload retVal="" descr="v2">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="unshrink" func="yes">
+			<Overload retVal="" descr="v2">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="use_animation" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="va_call" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_FUNC" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="va_end" func="yes">
+			<Overload retVal="" descr="v3">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="va_start" func="yes">
+			<Overload retVal="" descr="v3">
+			</Overload>
+		</KeyWord>
+		<KeyWord name="warp_off" />
+		<KeyWord name="warp_on" />
+		<KeyWord name="window_msg" func="yes">
+			<Overload retVal="">
+				<Param name="T_STR" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="window_time" />
+		<KeyWord name="winend" />
+		<KeyWord name="winend_time" />
+		<KeyWord name="winset_time" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="write_global_flag" func="yes">
+			<Overload retVal="" descr="v3">
+				<Param name="T_DWORD" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="xor" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_REG" />
+			</Overload>
+		</KeyWord>
+		<KeyWord name="xori" func="yes">
+			<Overload retVal="">
+				<Param name="T_REG" />
+				<Param name="T_DWORD" />
+			</Overload>
+		</KeyWord>
+	</AutoComplete>
+</NotepadPlus>
