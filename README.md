@@ -38,8 +38,8 @@ Some syntax errors that get detected:
 + misspelled opcodes (if you use syntax highlighting, you'll already see when there's something wrong)
 + invalid opcode arguments
 + registers that don't exist (R256...)
-+ warns about missing function labels in any jump statement (this includes switch cases like 2:100:101)
-+ invalid switch case definitions like 3:100:101 (needs 3 elements, not just 2)
++ warns about missing function labels in any jump statement (this includes switch cases like `2:100:101`)
++ invalid switch case definitions like `3:100:101` (needs 3 elements, not just 2)
 + some more...
 
 ## Credits
