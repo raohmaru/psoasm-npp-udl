@@ -5,8 +5,8 @@ import os, os.path
 import re
 import io
 
-__author__  = "Thomas Neubert"
-__version__ = "1.0.0"
+__author__  = "Thomas Neubert, Raohmaru"
+__version__ = "1.1.0"
 
 class Statement:
     """
@@ -465,7 +465,7 @@ def skip_spaces(line_str, line_pos):
     return read(line_str, line_pos, '[\s]')[1]
 
 
-def skip_comment(line_str, line_pos):
+def skip_comment(line_str, line_pos, line_num):
     """
     Skip all comments.
 
@@ -477,9 +477,10 @@ def skip_comment(line_str, line_pos):
         PasmSyntaxError: If comment doesn't start with '//'.
     """
     length = len(line_str)
+    token = line_str[line_pos:line_pos+2]
 
     if (line_pos+1) >= length or \
-       line_str[line_pos:line_pos+2] != '//':
+       token != '//' and token != '/*':
         msg = _text['error_comment'].format(line_num, line_pos)
         raise PasmSyntaxError(msg, line_str, line_num, line_pos)
 
@@ -500,6 +501,9 @@ def main(argv=[]):
     # input and output file names
     f_name_in  = None
     f_name_out = None
+    
+    # indicates that the line might be inisde a multiline comment (/* ... */)
+    multiline_comment = False
 
     # read options
     opt_list, args = getopt.getopt(argv, 'qf')
@@ -539,10 +543,20 @@ def main(argv=[]):
                 line_pos = skip_spaces(line_str, line_pos)
                 if line_pos >= length:
                     continue
+                  
+                # handles multiline comment
+                if multiline_comment:
+                    if line_str[line_pos:line_pos+2] == '*/':
+                        multiline_comment = False;
+                    continue
 
                 # discard comments
                 if line_str[line_pos] == '/':
-                    skip_comment(line_str, line_pos)
+                    skip_comment(line_str, line_pos, line_num)
+                    
+                    # starts multiline comment?
+                    if line_str[line_pos:line_pos+2] == '/*':
+                        multiline_comment = True
                     continue
 
                 # check if there is a label definition
@@ -618,7 +632,7 @@ def main(argv=[]):
 
                 # discard comments
                 if line_pos < length and line_str[line_pos] == '/':
-                    skip_comment(line_str, line_pos)
+                    skip_comment(line_str, line_pos, line_num)
 
         except PasmSyntaxError as pse:
             pse.print_error()
@@ -677,7 +691,7 @@ _text = {'usage':
         "Error line {}, position {}: Opcode '{}' doesn't exist.",
 
         'error_comment':
-        "Error line {}, position {}: Start comments with '//'.",
+        "Error line {}, position {}: Start comments with '//' or '/*'.",
 
         'error_register_1':
         "Error line {}, position {}: Invalid register format '{}'. Needs to be\nR<number> where number is 0-255.",
