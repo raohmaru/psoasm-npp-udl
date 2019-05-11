@@ -4,7 +4,7 @@ import os, os.path
 import re
 
 __author__  = "Thomas Neubert, Raohmaru"
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 
 class Statement:
     """
@@ -227,6 +227,32 @@ def r_dword(line_str, line_pos, line_num):
                          more than 4 Bytes where found.
     """
     return r_byte(line_str, line_pos, line_num, 4)
+
+
+def r_float(line_str, line_pos, line_num):
+    """
+    Reads value as a float number.
+
+    Args:
+        line_str (str): The code line.
+        line_pos (int): The code line position to start reading.
+        line_num (int): The code line number in the parsed text file.
+
+    Returns:
+        float_str (str)
+        line_pos (int): The updated line position.
+
+    Raises:
+        PasmSyntaxError: If read bytes are not a valid float number.
+    """
+    byte_str, line_pos_new = read(line_str, line_pos, '[^\s,/]')
+    pattern = '^-?[\d\.]+$'
+
+    if not re.match(pattern, byte_str, re.IGNORECASE):
+        msg = _text['error_float'].format(line_num, line_pos)
+        raise PasmSyntaxError(msg, line_str, line_num, line_pos)
+        
+    return byte_str, line_pos_new
 
 
 def r_data(line_str, line_pos, line_num):
@@ -652,7 +678,8 @@ def main(argv=[]):
 
 # All text...
 _byte_types = { 1: 'BYTE', 2: 'WORD', 4: 'DWORD' }
-_text = {'usage':
+_text = {
+    'usage':
         "python pasm.py [options] <pasm_file>\n" \
         "\n" \
         "Arguments:\n" \
@@ -665,70 +692,73 @@ _text = {'usage':
         " -f            Add dummy entries for any missing labels. Those will\n"\
         "               contain a simple ret statement.",
         
-        'pasm_arg_missing':
+     'pasm_arg_missing':
         "No PASM file defined.",
-        'file_not_found':
+     'file_not_found':
         "File '{}' not found.",
 
-        'error_label_1':
+     'error_label_1':
         "Error line {}, position {}: Invalid label format, must be a number.",
-        'error_label_2':
+     'error_label_2':
         "Error line {}, position {}: Invalid label '{}', must be a number 0..65535.",
-        'error_label_3':
+     'error_label_3':
         "Error line {}, position {}: Invalid label definition, was expecting ':'.",
-         'error_label_4':
+      'error_label_4':
         "Error line {}, position {}: Label '{}' was already defined.",
-         'warn_label':
+      'warn_label':
          "Warning: Label jump to '{}' has no target.",
-         'warn_label_add':
+      'warn_label_add':
          "Adding dummy entry for label '{}'.",
         
-        'error_opcode_1':
+     'error_opcode_1':
         "Error line {}, position {}: Opcode expected.",
-        'error_opcode_2':
+     'error_opcode_2':
         "Error line {}, position {}: Opcode '{}' doesn't exist.",
 
-        'error_comment':
+     'error_comment':
         "Error line {}, position {}: Start comments with '//' or '/*'.",
 
-        'error_register_1':
+     'error_register_1':
         "Error line {}, position {}: Invalid register format '{}'. Needs to be\nR<number> where number is 0-255.",
-        'error_register_2':
+     'error_register_2':
         "Error line {}, position {}: Only registers 0-255 supported.",
 
-        'error_byte':
+     'error_byte':
         "Error line {}, position {}: Invalid {} format.",
 
-        'error_array':
+     'error_float':
+        "Error line {}, position {}: Invalid float number format.",
+
+     'error_array':
         "Error line {}, position {}: Invalid array format '{}'.\nMust be 'count:num1:num2:num3:...'",
-        'error_array_count':
+     'error_array_count':
         "Error line {}, position {}: Invalid array format, {} elements are required.",
 
-        'error_string_1':
+     'error_string_1':
         "Error line {}, position {}: Was expecting String.",
-        'error_string_2':
+     'error_string_2':
         "Error line {}, position {}: String has no closing quote.",
 
-        'error_separator':
+     'error_separator':
         "Error line {}, position {}: Was expecting separator ','.",
     }
 
 # Opcode aliases.
 # If one of those is found, it will be replaced with the qedit equivalent.
 _opcode_alias = {
-        'msg': 'message',
-        'msg_add': 'add_msg',
-        'msg_end': 'mesend',
-        'win_msg': 'window_msg',
-        'win_end': 'winend',
-        'disable_mainmenu': 'disable_mainmen',
-        'modi': 'unknownEA',
-        'players_in_range': 'unknownF883',
-        'disp_chl_retry_menu': 'disp_chl_retry_mnu',
-        'set_slot_targetable': 'unknownF8CB',
-        'item_delete2': 'item_delete21CF',
-        #'BB_exchange_SLT': 'BB_exchange_SL'
-    }
+    'msg': 'message',
+    'msg_add': 'add_msg',
+    'msg_end': 'mesend',
+    'win_msg': 'window_msg',
+    'win_end': 'winend',
+    'disable_mainmenu': 'disable_mainmen',
+    'modi': 'unknownEA',
+    'players_in_range': 'unknownF883',
+    'disp_chl_retry_menu': 'disp_chl_retry_mnu',
+    'set_slot_targetable': 'unknownF8CB',
+    'item_delete2': 'item_delete21CF',
+    #'BB_exchange_SLT': 'BB_exchange_SL'
+}
 
 # Opcode dictionary, containing all opcodes and their parameters.
 _opcode_dict = {
@@ -1113,6 +1143,7 @@ _opcode_dict = {
         'set_slot_zalure': [r_register],
         'fleti_fixed_camera': [r_register],
         'fleti_locked_camera': [r_dword, r_register],
+        'default_camera_pos1': [],
         'default_camera_pos2': [],
         'set_motion_blur': [],
         'set_screen_b&w': [],
@@ -1140,19 +1171,19 @@ _opcode_dict = {
         'turn_off_bgm_p2': [],
         'turn_on_bgm_p2': [],
         'load_unk_data': [r_dword, r_dword, r_dword, r_dword, r_register, r_label],
-        'particle2': [r_register, r_dword, r_dword],
+        'particle2': [r_register, r_dword, r_float],
         'dec2float': [r_register, r_register],
         'float2dec': [r_register, r_register],
         'flet': [r_register, r_register],
-        'fleti': [r_register, r_dword],
+        'fleti': [r_register, r_float],
         'fadd': [r_register, r_register],
-        'faddi': [r_register, r_dword],
+        'faddi': [r_register, r_float],
         'fsub': [r_register, r_register],
-        'fsubi': [r_register, r_dword],
+        'fsubi': [r_register, r_float],
         'fmul': [r_register, r_register],
-        'fmuli': [r_register, r_dword],
+        'fmuli': [r_register, r_float],
         'fdiv': [r_register, r_register],
-        'fdivi': [r_register, r_dword],
+        'fdivi': [r_register, r_float],
         'get_unknown_count?': [r_dword, r_register],
         'get_stackable_item_count': [r_register, r_register],
         'freeze_and_hide_equip': [],
@@ -1188,7 +1219,7 @@ _opcode_dict = {
         'chat_box': [r_dword, r_dword, r_dword, r_dword, r_dword, r_string],
         'chat_bubble': [r_dword, r_string],
         'unknownF933': [r_register],
-        'scroll_text': [r_dword, r_dword, r_dword, r_dword, r_dword, r_dword, r_register, r_string],
+        'scroll_text': [r_dword, r_dword, r_dword, r_dword, r_dword, r_float, r_register, r_string],
         'gba_unknown1': [],
         'gba_unknown2': [],
         'gba_unknown3': [],
