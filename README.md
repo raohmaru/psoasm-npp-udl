@@ -24,15 +24,13 @@ The colors of the syntax highlighting for PSO asm works better with the theme Mo
 PASM files cannot be directly imported into [QEdit](https://qedit.info/index.php?title=Main_Page) unless the format is correct (and QEdit is very picky with it). To ensure compatibility, there is a parser and checker utility written in Python in the parser/ folder that will create a formatted file to be imported in QEdit.
 
 ### Usage
-You need to have Python installed on your system. To use the script, simply type in command line:  
+You need to have [Python](https://www.python.org/) installed on your system. To use the script, simply type in your command line/terminal:  
 ```
 python pasm.py [options] <pasm_file>
 ```
 Options:
 + `-q` This will remove all the comments, take care of the correct formatting for QEdit and create a new pasm file with a 'qe_' prefix.
 + `-f` This will add any missing function labels with a simple `ret` statement. (Like: `800: ret`)
-
-Note: Only single line comments starting with `//` are supported for now. (`// my comment...`)
 
 Some syntax errors that get detected:
 + misspelled opcodes (if you use syntax highlighting, you'll already see when there's something wrong)
@@ -42,8 +40,15 @@ Some syntax errors that get detected:
 + invalid switch case definitions like `3:100:101` (needs 3 elements, not just 2)
 + some more...
 
+### Extended Syntax
+Single line comments starting with `//` and multiline comments `/* ... */` are supported.
+
+Hexadecimal values can be expressed with the prefix `0x`. (`0x09FC8800`).
+
+Byte, Word and DWord can be expressed as unsigned integer values. The parser will transform it into hexadecimal values.
+
 ## Credits
-The PSO ASM syntax highlighting file and the parser were originally developed by Cookie and released in Ephinea's forum site:  
+The PSO ASM syntax highlighting file and the parser were originally developed by Thomas Neubert and released in Ephinea's forum site:  
 https://www.pioneer2.net/community/threads/writing-pasm-quest-scripts-in-a-text-editor.9828/
 
 ## License
