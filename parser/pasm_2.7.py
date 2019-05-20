@@ -8,6 +8,11 @@ import io
 __author__  = "Thomas Neubert, Raohmaru"
 __version__ = "1.2.0"
 
+# some constants here
+rgx_variable = 'a-z0-9_'
+rgx_macro = '([{0}]+)\s*\(\s*([{0}, ]*)\s*\)'.format(rgx_variable)
+allowed_directives = ['%include', '%macro']
+
 class Statement:
     """
     Statement containing the opcode, an argument list and an optional label.
@@ -32,7 +37,7 @@ class Statement:
         """
         stmt_str  = ''
         label_str = ''
-        
+
         if self.label >= 0:
             label_str = '{}:'.format(self.label)
 
@@ -68,7 +73,7 @@ class PasmSyntaxError(Exception):
         occured and mark the position.
         """
         print(self.msg)
-        print(self.line_str)
+        print(self.line_str.replace('\t', '    ').rstrip())
         print(' '*self.line_pos + '^')
 
 
@@ -113,7 +118,7 @@ def r_label(line_str, line_pos, line_num):
         PasmSyntaxError: If the label is not a valid number.
     """
     label, line_pos_new = read(line_str, line_pos, '[0-9]')
-    
+
     if not label.isdigit():
         msg = _text['error_label_1'].format(line_num, line_pos)
         raise PasmSyntaxError(msg, line_str, line_num, line_pos)
@@ -181,14 +186,14 @@ def r_byte(line_str, line_pos, line_num, length=1, hex_input=False):
     pattern = '^[0-9a-f]{{1,{}}}$'.format(length*2)
     is_hex = hex_input
     has_sign = False
-    
+
     # Checks if the value is in hex format (it starts with 0x, 0 or contains A-F)
     if byte_str[:2] == '0x':
         is_hex = True
         byte_str = byte_str[2:]
     elif byte_str[0] == '0' or re.search('[A-F]', byte_str, re.IGNORECASE):
         is_hex = True
-        
+
     # Check if the value is signed (has a - and therefore is not an hex value)
     if byte_str[0] == '-':
         has_sign = True
@@ -197,7 +202,7 @@ def r_byte(line_str, line_pos, line_num, length=1, hex_input=False):
     if not re.match(pattern, byte_str, re.IGNORECASE):
         msg = _text['error_byte'].format(line_num, line_pos, _byte_types[length])
         raise PasmSyntaxError(msg, line_str, line_num, line_pos)
-    
+
     if not is_hex:
          # Transform integers into hex
          if has_sign:
@@ -207,11 +212,11 @@ def r_byte(line_str, line_pos, line_num, length=1, hex_input=False):
          # Remove 'L' character (Python adds it for larger numbers)
          if byte_str[-1] == 'L':
              byte_str = byte_str[:-1]
-    
+
     # format uppercase bytes and leading zeros
     byte_str = byte_str.upper()
     byte_str = '0'*(length*2-len(byte_str)) + byte_str
-        
+
 
     return byte_str, line_pos_new
 
@@ -278,7 +283,7 @@ def r_float(line_str, line_pos, line_num):
     if not re.match(pattern, byte_str, re.IGNORECASE):
         msg = _text['error_float'].format(line_num, line_pos)
         raise PasmSyntaxError(msg, line_str, line_num, line_pos)
-        
+
     return byte_str, line_pos_new
 
 
@@ -318,7 +323,7 @@ def r_data(line_str, line_pos, line_num):
     data_str = data_list[0]
     for d in data_list[1:]:
         data_str += ' {}'.format(d)
-    
+
     return data_str, line_pos
 
 
@@ -344,7 +349,7 @@ def r_string(line_str, line_pos, line_num):
     length    = len(line_str)
     delimiter = None
     string    = "'"
-    
+
     if line_pos >= length:
         msg = _text['error_string_1'].format(line_num, line_pos)
         raise PasmSyntaxError(msg, line_str, line_num, line_pos)
@@ -355,7 +360,7 @@ def r_string(line_str, line_pos, line_num):
     else:
         msg = _text['error_string_1'].format(line_num, line_pos)
         raise PasmSyntaxError(msg, line_str, line_num, line_pos)
-                
+
     add_char = True
     while add_char:
         if line_pos >= length:
@@ -374,11 +379,11 @@ def r_string(line_str, line_pos, line_num):
                 line_pos += 1
         else:
             string += line_str[line_pos]
-        
+
         line_pos += 1
 
     string += "'"
-    
+
     return string, line_pos
 
 
@@ -446,7 +451,7 @@ def r_array_label(line_str, line_pos, line_num):
             raise PasmSyntaxError(msg, line_str, line_num, line_pos)
 
     return label_array_str, line_pos
-    
+
 
 def r_array_register(line_str, line_pos, line_num):
     """
@@ -494,11 +499,11 @@ def r_separator(line_str, line_pos, line_num):
         PasmSyntaxError: If no separator was found.
     """
     length = len(line_str)
-    
+
     if line_pos >= length or line_str[line_pos] != ',':
         msg = _text['error_separator'].format(line_num, line_pos)
         raise PasmSyntaxError(msg, line_str, line_num, line_pos)
-    
+
     return line_pos + 1
 
 
@@ -523,7 +528,7 @@ def skip_comment(line_str, line_pos, line_num):
     Args:
         line_str (str): The code line.
         line_pos (int): The code line position to start reading.
-        
+
     Raises:
         PasmSyntaxError: If comment doesn't start with '//'.
     """
@@ -534,6 +539,159 @@ def skip_comment(line_str, line_pos, line_num):
        token != '//' and token != '/*':
         msg = _text['error_comment'].format(line_num, line_pos)
         raise PasmSyntaxError(msg, line_str, line_num, line_pos)
+
+
+def remove_str_and_comments(str):
+    # gets a representation of the string so escaped string can be matched
+    newstr = repr(str)
+    # matches strings with or without escaped quotes inside
+    newstr = re.sub(r'[^u](\"|\')(?:\\\\.|[^\'\"])+\1', '', newstr)
+    # converts the string into its original type
+    newstr = eval(newstr)
+    # removes comments
+    newstr = re.sub('\/\/.*', '', newstr)
+    return newstr
+
+
+def add_variable(variables, line_str, line_num):
+    """
+    Reads and stores a variable definition.
+
+    Args:
+        variables (dict): Holds the variable name and values.
+        line_str (str): The code line.
+        line_num (int): The code line number in the parsed text file.
+    """
+
+    varName, varValue = re.split('\s+', line_str, 1)
+    invalid_name = re.search('[^{}]+'.format(rgx_variable), varName[1:], re.IGNORECASE)
+
+    if len(varName) == 1 or invalid_name:
+        line_pos = 0
+        msg = _text['error_variable2'].format(line_num, line_pos, rgx_variable)
+        raise PasmSyntaxError(msg, line_str, line_num, line_pos)
+
+    if not varValue:
+        line_pos = len(line_str) - 1
+        msg = _text['error_variable4'].format(line_num, line_pos)
+        raise PasmSyntaxError(msg, line_str, line_num, line_pos)
+
+    variables[varName] = varValue.strip()
+
+
+def replace_vars(variables, line_str, line_num):
+    """
+    Replace all variables found in the string with its values.
+
+    Args:
+        variables (dict): Holds the variable name and value.
+        line_str (str): The code line.
+        line_num (int): The code line number in the parsed text file.
+    """
+
+    for varName in variables:
+      if varName in line_str:
+         line_str = line_str.replace(varName, variables[varName])
+
+    # Undefined variables
+    if '$' in line_str:
+        str = remove_str_and_comments(line_str)
+        # If still there is a variable, raise an error
+        if '$' in str:
+           varName = re.search('\$[{}]+'.format(rgx_variable), str, re.IGNORECASE).group(0)
+           line_pos = line_str.strip().index(varName)
+           msg = _text['error_variable3'].format(line_num, line_pos, varName)
+           raise PasmSyntaxError(msg, line_str, line_num, line_pos)
+
+    return line_str
+
+
+def process_include(args, line_str, line_num, line_pos):
+    """
+    Reads and includes a file
+
+    Args:
+        args (list)
+        line_str (str): The code line.
+        line_num (int): The code line number in the parsed text file.
+        line_pos (int): The code line position to start reading.
+    """
+
+    # process include directives
+    filepath = args[0].strip('"').strip('\'')
+
+    # check if file to include exists, exit if not
+    if not os.path.exists(filepath):
+        msg = _text['file_not_found'].format(filepath)
+        raise PasmSyntaxError(msg, line_str, line_num, line_str.index(filepath))
+
+    file = io.open(filepath, mode='r', encoding='utf16')
+    return file.readlines()
+
+
+def process_macro(args, line_str, line_num, line_pos):
+    """
+    Evaluates a macro directive.
+
+    Args:
+        args (list)
+        line_str (str): The code line.
+        line_num (int): The code line number in the parsed text file.
+        line_pos (int): The code line position to start reading.
+    """
+
+    matches = re.match(rgx_macro, args.pop(), re.IGNORECASE)
+    if not matches:
+        msg = _text['error_macro1'].format(line_num, line_pos, rgx_variable)
+        raise PasmSyntaxError(msg, line_str, line_num, 7)
+
+    name = matches.group(1)
+    args = matches.group(2)
+    macro = {}
+    macro[name] = {
+        'args': [p.strip() for p in matches.group(2).split(',')] if args else [],
+        'body': []
+    }
+    return (name, macro)
+
+
+def run_macro(name, macro, line_str, line_num):
+    """
+    Applies a macro, replacing the call with the body of the macro with the given arguments.
+
+    Args:
+        name (str) Macro name
+        macro (dict) Macro definiton
+        line_str (str): The code line.
+        line_num (int): The code line number in the parsed text file.
+    """
+
+    matches = re.search(rgx_macro, line_str, re.IGNORECASE)
+    # it's a valid macro?
+    if not matches:
+        line_pos = line_str.index('(') + 1
+        msg = _text['error_macro1'].format(line_num, line_pos, rgx_variable)
+        raise PasmSyntaxError(msg, line_str, line_num, line_pos)
+    
+    # look for arguments
+    args = matches.group(2) or []
+    if args:
+        args = [a.strip() for a in args.split(',')]
+    
+    # check if the macro is call with the right number of args 
+    if len(args) != len(macro['args']):
+       line_pos = line_str.index('(') + 1
+       msg = _text['error_macro2'].format(line_num, line_pos, name, len(macro['args']))
+       raise PasmSyntaxError(msg, line_str, line_num, line_pos)
+    
+    new_lines = line_str[:line_str.index(matches.group(0))] + ''.join(macro['body'])
+    
+    # replace args with values
+    if args:
+        for i, arg in enumerate(macro['args']):
+            new_lines = re.sub('\\b{}\\b'.format(arg), args[i], new_lines)
+    
+    return new_lines.split('\n')
 
 
 def main(argv=[]):
@@ -552,9 +710,6 @@ def main(argv=[]):
     # input and output file names
     f_name_in  = None
     f_name_out = None
-    
-    # indicates that the line might be inisde a multiline comment (/* ... */)
-    multiline_comment = False
 
     # read options
     opt_list, args = getopt.getopt(argv, 'qf')
@@ -578,11 +733,105 @@ def main(argv=[]):
         print(_text['file_not_found'].format(f_name_in))
         return
 
+    # change the working dir to the location of the main file
+    os.chdir(os.path.dirname(f_name_in))
+
     # start parsing line by line...
     with io.open(f_name_in, mode='r', encoding='utf16') as f_in:
         try:
             line_num = 0
+            variables = {}
+            macros = {}
+            lines = []
+            code_found = False
+            macro_found = None
+            multiline_comment = False  # the current line might be inside a multiline comment (/* ... */)
+
+            # Read through the file to found directives
             for line_str in f_in:
+                length   = len(line_str)
+                line_pos = 0
+                line_num = line_num + 1
+
+                # skip leading spaces and discard empty lines
+                line_pos = skip_spaces(line_str, line_pos)
+                if line_pos >= length:
+                    continue
+
+                # directives
+                if line_str[line_pos] == '%':
+                    tokens = re.split('\s+', line_str.strip(), 1)
+                    directive_name = tokens.pop(0)
+
+                    # directives must be defined before the code
+                    if code_found:
+                        msg = _text['error_directive2'].format(line_num, line_pos)
+                        raise PasmSyntaxError(msg, line_str, line_num, line_pos)
+
+                    # check if directive name exists
+                    if not directive_name in allowed_directives:
+                        msg = _text['error_directive1'].format(line_num, line_pos, directive_name)
+                        raise PasmSyntaxError(msg, line_str, line_num, line_pos + 1)
+
+                    # check if directive syntax is valid
+                    if len(tokens) == 0:
+                        msg = _text['error_directive3'].format(line_num, line_pos, directive_name)
+                        raise PasmSyntaxError(msg, line_str, line_num, line_pos)
+
+                    if directive_name == '%include':
+                        new_lines = process_include(tokens, line_str, line_num, line_pos)
+                        if new_lines:
+                            lines += new_lines
+
+                    elif directive_name == '%macro':
+                        macro_found, macro = process_macro(tokens, line_str, line_num, line_pos)
+                        if macro:
+                           macros.update(macro)
+                    continue
+
+                # read macro body
+                if macro_found:
+                    if re.match('^\s', line_str[0]):
+                        macros[macro_found]['body'].append(line_str)
+                        continue
+                    else:
+                        macro_found = None
+
+                # variable definition
+                if line_str[line_pos] == '$':
+                    # It allow variables as labels
+                    if not re.match('\$[{}]+:'.format(rgx_variable), line_str[line_pos:], re.IGNORECASE):
+                        # variables must be defined before the code
+                        if code_found:
+                            msg = _text['error_variable1'].format(line_num, line_pos)
+                            raise PasmSyntaxError(msg, line_str, line_num, line_pos)
+
+                        add_variable(variables, line_str, line_num)
+                        continue
+
+                # first label definition found
+                if not code_found and re.match('^[0-9]+\s*:', line_str[line_pos:]):
+                    code_found = True
+                    
+                # run macros
+                if code_found and '(' in line_str:
+                    matches = re.search(rgx_macro, remove_str_and_comments(line_str), re.IGNORECASE)
+                    if matches:
+                        macro_name = matches.group(1)
+                        # it's an existing macro?
+                        if macro_name in macros:
+                            lines += run_macro(macro_name, macros[macro_name], line_str, line_num)
+                            continue
+                        else:
+                            line_pos = matches.start()
+                            msg = _text['error_macro3'].format(line_num, line_pos, macro_name)
+                            raise PasmSyntaxError(msg, line_str, line_num, line_pos)
+
+                lines.append(line_str)
+
+            line_num = 0
+            # now check and parse labels and opcodes
+            for line_str in lines:
                 length   = len(line_str)
                 line_pos = 0
                 line_num = line_num + 1
@@ -594,7 +843,7 @@ def main(argv=[]):
                 line_pos = skip_spaces(line_str, line_pos)
                 if line_pos >= length:
                     continue
-                  
+
                 # handles multiline comment
                 if multiline_comment:
                     if line_str[line_pos:line_pos+2] == '*/':
@@ -604,11 +853,16 @@ def main(argv=[]):
                 # discard comments
                 if line_str[line_pos] == '/':
                     skip_comment(line_str, line_pos, line_num)
-                    
+
                     # starts multiline comment?
                     if line_str[line_pos:line_pos+2] == '/*':
                         multiline_comment = True
                     continue
+
+                # variable replacement
+                if '$' in line_str:
+                    line_str = replace_vars(variables, line_str, line_num)
+                    length   = len(line_str)  # Length may have change after replacing the variables
 
                 # check if there is a label definition
                 if re.match('[0-9]', line_str[line_pos]):
@@ -618,7 +872,7 @@ def main(argv=[]):
                         msg = _text['error_label_4'].format(line_num, line_pos, label)
                         raise PasmSyntaxError(msg, line_str, line_num, line_pos)
                     label_defs.add(label)
-                    
+
                     if line_pos < length and line_str[line_pos] == ':':
                         # label definition complete
                         line_pos += 1
@@ -626,7 +880,7 @@ def main(argv=[]):
                         # missing ':' after label definition
                         msg = _text['error_label_3'].format(line_num, line_pos)
                         raise PasmSyntaxError(msg, line_str, line_num, line_pos)
-                    
+
                     line_pos = skip_spaces(line_str, line_pos)
 
                 if line_pos >= length:
@@ -640,7 +894,7 @@ def main(argv=[]):
 
                     if opcode in _opcode_alias.keys():
                         opcode = _opcode_alias[opcode]
-                    
+
                     if not opcode in _opcode_dict.keys():
                         # opcode doesn't exist
                         msg = _text['error_opcode_2'].format(line_num, line_pos, opcode)
@@ -672,7 +926,7 @@ def main(argv=[]):
                                 label_jumps.add(int(l))
 
                     stmt_list.append(stmt)
-                    
+
                 else:
                     # something went wrong, was expecting opcode
                     msg = _text['error_opcode_1'].format(line_num, line_pos)
@@ -718,56 +972,88 @@ _text = {
         "               with a 'qe_' prefix.\n"\
         " -f            Add dummy entries for any missing labels. Those will\n"\
         "               contain a simple ret statement.",
-        
+
      'pasm_arg_missing':
         "No PASM file defined.",
      'file_not_found':
         "File '{}' not found.",
 
      'error_label_1':
-        "Error line {}, position {}: Invalid label format, must be a number.",
+        "Error: line {}, position {}: Invalid label format, must be a number.",
      'error_label_2':
-        "Error line {}, position {}: Invalid label '{}', must be a number 0..65535.",
+        "Error: line {}, position {}: Invalid label '{}', must be a number 0..65535.",
      'error_label_3':
-        "Error line {}, position {}: Invalid label definition, was expecting ':'.",
+        "Error: line {}, position {}: Invalid label definition, was expecting ':'.",
       'error_label_4':
-        "Error line {}, position {}: Label '{}' was already defined.",
+        "Error: line {}, position {}: Label '{}' was already defined.",
       'warn_label':
          "Warning: Label jump to '{}' has no target.",
       'warn_label_add':
          "Adding dummy entry for label '{}'.",
-        
+
      'error_opcode_1':
-        "Error line {}, position {}: Opcode expected.",
+        "Error: line {}, position {}: Opcode expected.",
      'error_opcode_2':
-        "Error line {}, position {}: Opcode '{}' doesn't exist.",
+        "Error: line {}, position {}: Opcode '{}' doesn't exist.",
 
      'error_comment':
-        "Error line {}, position {}: Start comments with '//' or '/*'.",
+        "Error: line {}, position {}: Start comments with '//' or '/*'.",
 
      'error_register_1':
-        "Error line {}, position {}: Invalid register format '{}'. Needs to be\nR<number> where number is 0-255.",
+        "Error: line {}, position {}: Invalid register format '{}'. Needs to be\nR<number> where number is 0-255.",
      'error_register_2':
-        "Error line {}, position {}: Only registers 0-255 supported.",
+        "Error: line {}, position {}: Only registers 0-255 supported.",
 
      'error_byte':
-        "Error line {}, position {}: Invalid {} format.",
+        "Error: line {}, position {}: Invalid {} format.",
 
      'error_float':
-        "Error line {}, position {}: Invalid float number format.",
+        "Error: line {}, position {}: Invalid float number format.",
 
      'error_array':
-        "Error line {}, position {}: Invalid array format '{}'.\nMust be 'count:num1:num2:num3:...'",
+        "Error: line {}, position {}: Invalid array format '{}'.\nMust be 'count:num1:num2:num3:...'",
      'error_array_count':
-        "Error line {}, position {}: Invalid array format, {} elements are required.",
+        "Error: line {}, position {}: Invalid array format, {} elements are required.",
 
      'error_string_1':
-        "Error line {}, position {}: Was expecting String.",
+        "Error: line {}, position {}: Was expecting String.",
      'error_string_2':
-        "Error line {}, position {}: String has no closing quote.",
+        "Error: line {}, position {}: String has no closing quote.",
 
      'error_separator':
-        "Error line {}, position {}: Was expecting separator ','.",
+        "Error: line {}, position {}: Was expecting separator ','.",
+
+     'error_variable1':
+        "SyntaxError: line {}, position {}: Variables must be defined before the code.",
+
+     'error_variable2':
+        "SyntaxError: line {}, position {}: Invalid variable name.\n" \
+        "Variable name must start with '$' and must be followed by one or more of these characters: [{}]",
+
+     'error_variable3':
+        "ReferenceError: line {}, position {}: Undefined variable {}.",
+
+     'error_variable4':
+        "SyntaxError: line {}, position {}: Invalid variable definition, expected expression.\n",
+
+     'error_directive1':
+        "NameError: line {}, position {}: Directive {} not found.",
+
+     'error_directive2':
+        "SyntaxError: line {}, position {}: Directives must be defined before the code.",
+
+     'error_directive3':
+        "SyntaxError: line {}, position {}: Invalid directive definition.",
+
+     'error_macro1':
+        "SyntaxError: line {}, position {}: Invalid macro definition.\n" \
+        "Format: name([arg1 [,arg2 [,...]]]), where the only allowed characters are [{}]",
+
+     'error_macro2':
+        "Error: line {}, position {}: Wrong number of arguments. {}() expects exactly {}.",
+
+     'error_macro3':
+        "Error: line {}, position {}: Undefined macro {}().",
     }
 
 # Opcode aliases.
