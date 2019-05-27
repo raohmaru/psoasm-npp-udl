@@ -2,6 +2,7 @@
 ## v1.2.0
 + Added new value type float.
 + Hexadecimal values can be prefixed with 0x (unless the values of HEX:).
++ Negative integers are transformed into hexadecimal.
 + Variables.
 + Include directive.
 + Macros.

@@ -9,9 +9,17 @@ __author__  = "Thomas Neubert, Raohmaru"
 __version__ = "1.2.0"
 
 # some constants here
-rgx_variable = 'a-z0-9_'
-rgx_macro = '([{0}]+)\s*\(\s*([{0}, ]*)\s*\)'.format(rgx_variable)
-allowed_directives = ['%include', '%macro']
+_rgx_variable = 'a-z0-9_'
+_rgx_macro = '([{0}]+)\s*\(\s*([{0}, ]*)\s*\)'.format(_rgx_variable)
+_allowed_directives = ['%include', '%macro']
+
+# global _variables
+# all label definitions and label jumps
+_label_defs  = set()
+_label_jumps = set()
+# holds _variables and _macros found in the code
+_variables = {}
+_macros = {}
 
 class Statement:
     """
@@ -553,22 +561,22 @@ def remove_str_and_comments(str):
     return newstr
 
 
-def add_variable(variables, line_str, line_num):
+def add_variable(_variables, line_str, line_num):
     """
     Reads and stores a variable definition.
 
     Args:
-        variables (dict): Holds the variable name and values.
+        _variables (dict): Holds the variable name and values.
         line_str (str): The code line.
         line_num (int): The code line number in the parsed text file.
     """
 
     varName, varValue = re.split('\s+', line_str, 1)
-    invalid_name = re.search('[^{}]+'.format(rgx_variable), varName[1:], re.IGNORECASE)
+    invalid_name = re.search('[^{}]+'.format(_rgx_variable), varName[1:], re.IGNORECASE)
 
     if len(varName) == 1 or invalid_name:
         line_pos = 0
-        msg = _text['error_variable2'].format(line_num, line_pos, rgx_variable)
+        msg = _text['error_variable2'].format(line_num, line_pos, _rgx_variable)
         raise PasmSyntaxError(msg, line_str, line_num, line_pos)
 
     if not varValue:
@@ -576,57 +584,34 @@ def add_variable(variables, line_str, line_num):
         msg = _text['error_variable4'].format(line_num, line_pos)
         raise PasmSyntaxError(msg, line_str, line_num, line_pos)
 
-    variables[varName] = varValue.strip()
+    _variables[varName] = varValue.strip()
 
 
-def replace_vars(variables, line_str, line_num):
+def replace_vars(_variables, line_str, line_num):
     """
-    Replace all variables found in the string with its values.
+    Replace all _variables found in the string with its values.
 
     Args:
-        variables (dict): Holds the variable name and value.
+        _variables (dict): Holds the variable name and value.
         line_str (str): The code line.
         line_num (int): The code line number in the parsed text file.
     """
 
-    for varName in variables:
+    for varName in _variables:
       if varName in line_str:
-         line_str = line_str.replace(varName, variables[varName])
+         line_str = line_str.replace(varName, _variables[varName])
 
-    # Undefined variables
+    # Undefined _variables
     if '$' in line_str:
         str = remove_str_and_comments(line_str)
         # If still there is a variable, raise an error
         if '$' in str:
-           varName = re.search('\$[{}]+'.format(rgx_variable), str, re.IGNORECASE).group(0)
+           varName = re.search('\$[{}]+'.format(_rgx_variable), str, re.IGNORECASE).group(0)
            line_pos = line_str.strip().index(varName)
            msg = _text['error_variable3'].format(line_num, line_pos, varName)
            raise PasmSyntaxError(msg, line_str, line_num, line_pos)
 
     return line_str
-
-
-def process_include(args, line_str, line_num, line_pos):
-    """
-    Reads and includes a file
-
-    Args:
-        args (list)
-        line_str (str): The code line.
-        line_num (int): The code line number in the parsed text file.
-        line_pos (int): The code line position to start reading.
-    """
-
-    # process include directives
-    filepath = args[0].strip('"').strip('\'')
-
-    # check if file to include exists, exit if not
-    if not os.path.exists(filepath):
-        msg = _text['file_not_found'].format(filepath)
-        raise PasmSyntaxError(msg, line_str, line_num, line_str.index(filepath))
-
-    file = io.open(filepath, mode='r', encoding='utf16')
-    return file.readlines()
 
 
 def process_macro(args, line_str, line_num, line_pos):
@@ -640,9 +625,9 @@ def process_macro(args, line_str, line_num, line_pos):
         line_pos (int): The code line position to start reading.
     """
 
-    matches = re.match(rgx_macro, args.pop(), re.IGNORECASE)
+    matches = re.match(_rgx_macro, args.pop(), re.IGNORECASE)
     if not matches:
-        msg = _text['error_macro1'].format(line_num, line_pos, rgx_variable)
+        msg = _text['error_macro1'].format(line_num, line_pos, _rgx_variable)
         raise PasmSyntaxError(msg, line_str, line_num, 7)
 
     name = matches.group(1)
@@ -666,11 +651,11 @@ def run_macro(name, macro, line_str, line_num):
         line_num (int): The code line number in the parsed text file.
     """
 
-    matches = re.search(rgx_macro, line_str, re.IGNORECASE)
+    matches = re.search(_rgx_macro, line_str, re.IGNORECASE)
     # it's a valid macro?
     if not matches:
         line_pos = line_str.index('(') + 1
-        msg = _text['error_macro1'].format(line_num, line_pos, rgx_variable)
+        msg = _text['error_macro1'].format(line_num, line_pos, _rgx_variable)
         raise PasmSyntaxError(msg, line_str, line_num, line_pos)
     
     # look for arguments
@@ -694,56 +679,15 @@ def run_macro(name, macro, line_str, line_num):
     return new_lines.split('\n')
 
 
-def main(argv=[]):
-    # flags
-    # generate qedit compliant pasm file
-    qedit      = False
-    # generate dummy labels with a simple ret statement for all missing labels
-    fix_labels = False
+def parse_file(filename, level = 0):
     # the parsed statement list
     stmt_list  = []
 
-    # all label definitions and label jumps
-    label_defs  = set()
-    label_jumps = set()
-
-    # input and output file names
-    f_name_in  = None
-    f_name_out = None
-
-    # read options
-    opt_list, args = getopt.getopt(argv, 'qf')
-    for opt, value in opt_list:
-        if opt == '-q':   qedit      = True
-        elif opt == '-f': fix_labels = True
-
-    # set pasm file argument, exit if nothing was set
-    if args:
-        f_name_in  = os.path.abspath(args[0])
-        f_name_out = 'qe_' + os.path.basename(f_name_in)
-        f_name_out = os.path.join(os.path.dirname(f_name_in), f_name_out)
-    else:
-        print(_text['pasm_arg_missing'])
-        print()
-        print(_text['usage'])
-        return
-
-    # check if pasm file exists, exit if not
-    if not os.path.exists(f_name_in):
-        print(_text['file_not_found'].format(f_name_in))
-        return
-
-    # change the working dir to the location of the main file
-    os.chdir(os.path.dirname(f_name_in))
-
     # start parsing line by line...
-    with io.open(f_name_in, mode='r', encoding='utf16') as f_in:
+    with io.open(filename, mode='r', encoding='utf16') as f_in:
         try:
             line_num = 0
-            variables = {}
-            macros = {}
             lines = []
-            code_found = False
             macro_found = None
             multiline_comment = False  # the current line might be inside a multiline comment (/* ... */)
 
@@ -762,14 +706,9 @@ def main(argv=[]):
                 if line_str[line_pos] == '%':
                     tokens = re.split('\s+', line_str.strip(), 1)
                     directive_name = tokens.pop(0)
-
-                    # directives must be defined before the code
-                    if code_found:
-                        msg = _text['error_directive2'].format(line_num, line_pos)
-                        raise PasmSyntaxError(msg, line_str, line_num, line_pos)
-
+                    
                     # check if directive name exists
-                    if not directive_name in allowed_directives:
+                    if not directive_name in _allowed_directives:
                         msg = _text['error_directive1'].format(line_num, line_pos, directive_name)
                         raise PasmSyntaxError(msg, line_str, line_num, line_pos + 1)
 
@@ -779,62 +718,52 @@ def main(argv=[]):
                         raise PasmSyntaxError(msg, line_str, line_num, line_pos)
 
                     if directive_name == '%include':
-                        new_lines = process_include(tokens, line_str, line_num, line_pos)
-                        if new_lines:
-                            lines += new_lines
+                        inc_path = tokens[0].strip('"').strip('\'')
+
+                        # check if file to include exists, raise error if not
+                        if not os.path.exists(inc_path):
+                            msg = _text['file_not_found'].format(inc_path)
+                            raise PasmSyntaxError(msg, line_str, line_num, line_str.index(inc_path))
+                        
+                        lines += parse_file(inc_path, level+1)
+                        continue
 
                     elif directive_name == '%macro':
                         macro_found, macro = process_macro(tokens, line_str, line_num, line_pos)
                         if macro:
-                           macros.update(macro)
+                           _macros.update(macro)
                     continue
 
                 # read macro body
                 if macro_found:
                     if re.match('^\s', line_str[0]):
-                        macros[macro_found]['body'].append(line_str)
+                        _macros[macro_found]['body'].append(line_str)
                         continue
                     else:
                         macro_found = None
 
                 # variable definition
                 if line_str[line_pos] == '$':
-                    # It allow variables as labels
-                    if not re.match('\$[{}]+:'.format(rgx_variable), line_str[line_pos:], re.IGNORECASE):
-                        # variables must be defined before the code
-                        if code_found:
-                            msg = _text['error_variable1'].format(line_num, line_pos)
-                            raise PasmSyntaxError(msg, line_str, line_num, line_pos)
-
-                        add_variable(variables, line_str, line_num)
-                        continue
+                    add_variable(_variables, line_str, line_num)
+                    continue
 
                 # first label definition found
-                if not code_found and re.match('^[0-9]+\s*:', line_str[line_pos:]):
-                    code_found = True
-                    
-                # run macros
-                if code_found and '(' in line_str:
-                    matches = re.search(rgx_macro, remove_str_and_comments(line_str), re.IGNORECASE)
-                    if matches:
-                        macro_name = matches.group(1)
-                        # it's an existing macro?
-                        if macro_name in macros:
-                            lines += run_macro(macro_name, macros[macro_name], line_str, line_num)
-                            continue
-                        else:
-                            line_pos = matches.start()
-                            msg = _text['error_macro3'].format(line_num, line_pos, macro_name)
-                            raise PasmSyntaxError(msg, line_str, line_num, line_pos)
-
-                lines.append(line_str)
-
+                if re.match('^[0-9]+\s*:', line_str[line_pos:]):
+                    lines.append(line_str)
+                    break
+            
+            # add the rest of lines of the file
+            lines += f_in.readlines()
+            
+            if level > 0:
+                return lines
+            
             line_num = 0
             # now check and parse labels and opcodes
-            for line_str in lines:
+            for i, line_str in enumerate(lines):
                 length   = len(line_str)
                 line_pos = 0
-                line_num = line_num + 1
+                line_num += 1
                 label    = -1
                 stmt     = None
                 literal  = None
@@ -858,20 +787,47 @@ def main(argv=[]):
                     if line_str[line_pos:line_pos+2] == '/*':
                         multiline_comment = True
                     continue
+                    
+                # directives must be defined before the code
+                if line_str[line_pos] == '%':
+                    msg = _text['error_directive2'].format(line_num, line_pos)
+                    raise PasmSyntaxError(msg, line_str, line_num, line_pos)
+                    
+                # _variables must be defined before the code
+                if line_str[line_pos] == '$':
+                    # It allow _variables as labels
+                    if not re.match('^\$[{}]+\s*:'.format(_rgx_variable), line_str[line_pos:], re.IGNORECASE):
+                        msg = _text['error_variable1'].format(line_num, line_pos)
+                        raise PasmSyntaxError(msg, line_str, line_num, line_pos)
+                    
+                # run _macros
+                if '(' in line_str:
+                    matches = re.search(_rgx_macro, remove_str_and_comments(line_str), re.IGNORECASE)
+                    if matches:
+                        macro_name = matches.group(1)
+                        # it's an existing macro?
+                        if macro_name in _macros:
+                            # insert new lines in the current position and skip current line
+                            lines[i+1:i+1] = run_macro(macro_name, _macros[macro_name], line_str, line_num)
+                            continue
+                        else:
+                            line_pos = matches.start()
+                            msg = _text['error_macro3'].format(line_num, line_pos, macro_name)
+                            raise PasmSyntaxError(msg, line_str, line_num, line_pos)
 
                 # variable replacement
                 if '$' in line_str:
-                    line_str = replace_vars(variables, line_str, line_num)
-                    length   = len(line_str)  # Length may have change after replacing the variables
+                    line_str = replace_vars(_variables, line_str, line_num)
+                    length   = len(line_str)  # Length may have change after replacing the _variables
 
                 # check if there is a label definition
                 if re.match('[0-9]', line_str[line_pos]):
                     label, line_pos = r_label(line_str, line_pos, line_num)
 
-                    if label >= 0 and label in label_defs:
+                    if label >= 0 and label in _label_defs:
                         msg = _text['error_label_4'].format(line_num, line_pos, label)
                         raise PasmSyntaxError(msg, line_str, line_num, line_pos)
-                    label_defs.add(label)
+                    _label_defs.add(label)
 
                     if line_pos < length and line_str[line_pos] == ':':
                         # label definition complete
@@ -919,11 +875,11 @@ def main(argv=[]):
                         i += 1
 
                         if opd == r_label:
-                            label_jumps.add(literal)
+                            _label_jumps.add(literal)
                         elif opd == r_array_label:
                             label_list = literal.split(':')[1:]
                             for l in label_list:
-                                label_jumps.add(int(l))
+                                _label_jumps.add(int(l))
 
                     stmt_list.append(stmt)
 
@@ -942,19 +898,61 @@ def main(argv=[]):
         except PasmSyntaxError as pse:
             pse.print_error()
             return
+            
+    return stmt_list
 
-        # check if label jumps have a target
-        for lab in label_jumps:
-            if not lab in label_defs:
-                print(_text['warn_label'].format(lab))
-                if fix_labels:
-                    print(_text['warn_label_add'].format(lab))
-                    stmt_list.append(Statement('ret', [], lab))
 
-        # convert to qedit readable format
-        with io.open(f_name_out, 'w', encoding='utf-16') as f_out:
-            for stmt in stmt_list:
-                print(unicode(stmt.to_string()), file=f_out)
+def main(argv=[]):
+    # flags
+    # generate dummy labels with a simple ret statement for all missing labels
+    fix_labels = False
+
+    # input and output file names
+    f_name_in  = None
+    f_name_out = None
+
+    # read options
+    opt_list, args = getopt.getopt(argv, 'f')
+    for opt, value in opt_list:
+        if opt == '-f': fix_labels = True
+
+    # set pasm file argument, exit if nothing was set
+    if args:
+        f_name_in  = os.path.abspath(args[0])
+        f_name_out = 'qe_' + os.path.basename(f_name_in)
+        f_name_out = os.path.join(os.path.dirname(f_name_in), f_name_out)
+    else:
+        print(_text['pasm_arg_missing'])
+        print()
+        print(_text['usage'])
+        return
+
+    # check if pasm file exists, exit if not
+    if not os.path.exists(f_name_in):
+        print(_text['file_not_found'].format(f_name_in))
+        return
+
+    # change the working dir to the location of the main file (so it is the relative path for the %includes)
+    os.chdir(os.path.dirname(f_name_in))
+    
+    stmt_list = parse_file(f_name_in)
+    if not stmt_list:
+        return
+
+    # check if label jumps have a target
+    for lab in _label_jumps:
+        if not lab in _label_defs:
+            print(_text['warn_label'].format(lab))
+            if fix_labels:
+                print(_text['warn_label_add'].format(lab))
+                stmt_list.append(Statement('ret', [], lab))
+
+    # convert to qedit readable format
+    with io.open(f_name_out, 'w', encoding='utf-16') as f_out:
+        for stmt in stmt_list:
+            print(unicode(stmt.to_string()), file=f_out)
+            
+    print('File {} has been created'.format(os.path.basename(f_name_out)))
 
 
 # All text...
@@ -967,9 +965,6 @@ _text = {
         " <pasm_file>   Path to the pasm file.\n" \
         "\n" \
         "Options:\n" \
-        " -q            Compress pasm file for qedit import. Removes all\n" \
-        "               comments and empty lines and writes a new pasm file\n" \
-        "               with a 'qe_' prefix.\n"\
         " -f            Add dummy entries for any missing labels. Those will\n"\
         "               contain a simple ret statement.",
 
